@@ -33,6 +33,7 @@ app.get("/socios/v1/categorias", (req, res) => {
 		res.status(404).json({
 			estado: 0,
 			mensaje: "No existen categorias",
+			categorias: [],
 		});
 	}
 });
@@ -45,12 +46,13 @@ app.get("/socios/v1/categorias/:id", (req, res) => {
 		res.status(200).json({
 			estado: 1,
 			mensaje: "Categoria encontrada",
-			categoria: categoria,
+			categorias: [categoria],
 		});
 	} else {
 		res.status(404).json({
 			estado: 0,
 			mensaje: "No existen categoria",
+			categorias: [],
 		});
 	}
 });
@@ -78,12 +80,13 @@ app.post("/socios/v1/categorias", (req, res) => {
 			res.status(201).json({
 				estado: 1,
 				mensaje: "Categoria creada correctamente",
-				categoria: categoria,
+				categorias: [categoria],
 			});
 		} else {
 			res.status(500).json({
 				estado: 0,
 				mensaje: "No se agrego correctamente",
+				categorias: [],
 			});
 		}
 	}
@@ -98,6 +101,7 @@ app.put("/socios/v1/categorias/:id", (req, res) => {
 		res.status(400).json({
 			estado: 0,
 			mensaje: "BAD REQUEST Faltan parametros en la solicitud",
+			categorias: [],
 		});
 	} else {
 		const posActualizar = categorias.findIndex(
@@ -111,13 +115,14 @@ app.put("/socios/v1/categorias/:id", (req, res) => {
 			res.status(200).json({
 				estado: 1,
 				mensaje: "Categoria actualizada correctamente",
-				categoria: categorias[posActualizar],
+				categorias: categorias[posActualizar],
 			});
 		} else {
 			//No se encontro la categoria con el id buscado
 			res.status(404).json({
 				estado: 0,
 				mensaje: "No se actualizo",
+				categorias: [],
 			});
 		}
 	}
@@ -135,11 +140,13 @@ app.delete("/socios/v1/categorias/:id", (req, res) => {
 		res.status(201).json({
 			estado: 1,
 			mensaje: "Categoria eliminada correctamente",
+			categorias: [],
 		});
 	} else {
 		res.status(404).json({
 			estado: 0,
 			mensaje: "No se elimino",
+			categorias: [],
 		});
 	}
 });
